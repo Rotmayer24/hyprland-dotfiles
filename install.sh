@@ -49,6 +49,7 @@ install_official() {
     network-manager-applet
     blueman
     dbus
+    flameshot
   )
   sudo pacman -S --needed --noconfirm "${official[@]}"
 }
