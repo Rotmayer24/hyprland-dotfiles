@@ -66,11 +66,12 @@ This configuration is designed for Wayland environments and includes a curated s
 | SUPER + J               | Toggle Split                   |
 | SUPER + K               | Swap Split                     |
 | SUPER + X               | Browser (Firefox)              |
+| SUPER + B               | Power Menu
 
 ---
 ## Notes
 
-* Place your wallpapers in `~/Pictures/Wallpapers`.
+* You can add wallpapers in `~/Pictures/Wallpapers`.
 * You can add your Waybar configurations in `~/.config/waybar/themes` using `.jsonc` and `.css` files.
 * Hyprland version = 0.54.2
 
@@ -92,6 +93,7 @@ bash ./install.sh
 
 * adi1090x (Rofi themes)
 * pinkSakoora (Hyprlock config)
+* michaelScopic(Wallpapers)
 * Mon4sm (Eww config)
 
 ---
