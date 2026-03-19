@@ -71,7 +71,20 @@ install_aur() {
 # ----------------- link dotfiles -----------------
 link_dotfiles() {
   CONFIG_DIR="$HOME/.config"
+  WALLPAPER_DIR="$HOME/Pictures/"
+  WALLPAPERS="$WALLPAPER_DIR/Wallpapers"
   mkdir -p "$CONFIG_DIR"
+  mkdir -p "$WALLPAPER_DIR"
+
+
+  log " Wallpaper Directory: $WALLPAPER_DIR"
+  if [! -d "$WALLPAPERS" ]; then
+    cp -r "$SCRIPT_DIR/Wallpapers" "$WALLPAPER_DIR" 
+  else 
+    mv "$WALLPAPERS" "$WALLPAPERS".bak
+    cp -r "$SCRIPT_DIR/Wallpapers" "$WALLPAPER_DIR" 
+
+
 
   for d in waybar rofi kitty eww hypr; do
     SRC="$SCRIPT_DIR/config/$d"
