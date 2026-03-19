@@ -1,0 +1,150 @@
+@import "colors/color.css";
+
+* {
+  all: unset;
+  font-family: "Rubik", "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP", "Noto Sans CJK KR";
+}
+
+tooltip {
+  background-color: @bg1;
+  color: @fg;
+  margin: 10px;
+  border-radius: 13px;
+}
+
+.modules-center {
+  background-color: @bg1;
+  padding: 2px 4px;
+  border-radius: 99px;
+}
+
+.modules-left {
+  background-color: @bg1;
+  padding: 2px 4px;
+  border-radius: 99px;
+}
+
+.modules-right {
+  background-color: @bg1;
+  padding: 2px 4px;
+  border-radius: 99px;
+}
+
+#clock {
+  font-weight: 500;
+}
+
+
+#tray {
+  padding: 0 10px;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #eb4d4b;
+}
+
+#workspaces {
+  background-color: @bg3;
+  padding: 2px 3px;
+  margin: 2px 0;
+  border-radius: 99px;
+
+}
+
+#workspaces button {
+  background-color: @bg1;
+  padding: 0px 5px;
+  border-radius: 99px;
+  margin: 0 2px;
+  transition: all 300ms ease-in-out;
+  min-width: 7px;
+}
+
+#workspaces button.empty {
+  color: @grey2;
+}
+
+#workspaces button.active {
+  background-color: @green;
+  color: @bg1;
+  min-width: 1.5rem;
+  font-weight: 400;
+  transition: none;
+}
+
+#battery {
+  background-color: @green;
+  margin: 6px;
+  padding: 0 4px;
+  border-radius: 99px;
+  font-weight: 400;
+  color: @bg1;
+}
+
+#battery.warning {
+  background-color: @yellow;
+}
+
+#battery.critical {
+  background-color: @red;
+}
+
+menu {
+  background: @bg1;
+  color: @fg;
+  padding: 0 4px;
+  margin-top: 10px;
+  border-radius: 13px;
+}
+
+menuitem {
+  padding: 4px 10px;
+}
+
+#waybar-mpris {
+  font-family: "Noto Sans Mono", monospace;
+  font-size: 16px;
+  color: #c0caf5;
+  padding: 0 5px;
+}
+
+/* Состояние "воспроизведение" */
+#waybar-mpris.playing::before {
+  content: "";
+  /* иконка Play */
+  margin-right: 4px;
+  color: #9ece6a;
+  /* зеленый для playing */
+}
+
+/* Состояние "пауза" */
+#waybar-mpris.paused::before {
+  content: "";
+  /* иконка Pause */
+  margin-right: 4px;
+  color: #e0af68;
+  /* желтый для paused */
+}
+
+/* Состояние "стоп" */
+#waybar-mpris.stopped::before {
+  content: "";
+  /* иконка Stop */
+  margin-right: 4px;
+  color: #f7768e;
+  /* красный для stopped */
+}
+
+/* Текст с названием трека */
+#waybar-mpris span {
+  max-width: 120px;
+  /* чтобы не уходило слишком далеко */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

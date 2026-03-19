@@ -1,0 +1,7 @@
+/* Grayscale palette */
+@define-color background #1a1b26;
+@define-color foreground #c0caf5;
+
+@define-color gray-light #2a2b38;
+@define-color gray-mid #414868;
+@define-color gray-dark #565f89;
