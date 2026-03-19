@@ -39,18 +39,8 @@ This configuration is designed for Wayland environments and includes a curated s
 * **Wallpapers**
   https://github.com/michaelScopic/Wallpapers
 
----
-
-## 🖼 Wallpaper System
-
-This setup uses:
-
-* `swww` for dynamic wallpaper rendering
-* Custom script with:
-
-  * Folder navigation
-  * Image previews inside Rofi
-  * Quick wallpaper switching
+* **Eww**
+  https://github.com/Mon4sm/monasm-dots
 
 ---
 
@@ -76,6 +66,13 @@ This setup uses:
 | SUPER + J               | Toggle Split                   |
 | SUPER + K               | Swap Split                     |
 | SUPER + X               | Browser (Firefox)              |
+
+---
+## Notes
+
+* Place your wallpapers in `~/Pictures/Wallpapers`.
+* You can add your Waybar configurations in `~/.config/waybar/themes` using `.jsonc` and `.css` files.
+* Hyprland version = 0.54.2
 
 ---
 
