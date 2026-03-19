@@ -50,6 +50,8 @@ install_official() {
     blueman
     dbus
     flameshot
+    grim
+    slurp
   )
   sudo pacman -S --needed --noconfirm "${official[@]}"
 }
