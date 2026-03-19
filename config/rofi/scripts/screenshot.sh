@@ -10,11 +10,11 @@ choice=$(echo -e "$options" | rofi -dmenu -p "Screenshot Menu" -i -I -theme "$RO
 
 case "$choice" in
 Part\ screen)
-  flameshot gui -c
+  grim -g "$(slurp)" - | wl-copy
   ;;
 
 Fullscreen)
-  flameshot full -c
+  grim - | wl-copy
   ;;
 
 Cancel)
