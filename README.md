@@ -93,7 +93,6 @@ bash ./install.sh
 
 ## 🧠 Credits
 
-* Hyprland community
 * adi1090x (Rofi themes)
 * pinkSakoora (Hyprlock config)
 * Mon4sm (Eww config)
