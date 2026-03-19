@@ -8,24 +8,23 @@ This configuration is designed for Wayland environments and includes a curated s
 ## ✨ Features
 
 * Minimal and fast **Hyprland** configuration
-* Vim-like navigation (workspace & window control)
 * Wallpaper picker with preview (Rofi-based)
 * Smooth wallpaper transitions using `swww`
 * Clean and modern lock screen
-* Custom Rofi styling
 
 ---
 
 ## 🧩 Components
 
-| Component    | Program  |
-| ------------ | -------- |
-| Terminal     | kitty    |
-| Browser      | firefox  |
-| File Manager | Dolphin  |
-| Lock Screen  | hyprlock |
-| Launcher     | rofi     |
-| Wallpaper    | swww     |
+| Component    | Program             |
+| ------------ | --------            |
+| Terminal     | kitty               |
+| Browser      | firefox             |
+| File Manager | Dolphin             |
+| Lock Screen  | hyprlock            |
+| Launcher     | rofi                |
+| Wallpaper    | swww                |
+| Panel        | waybar/hyprpanel/eww|
 
 ---
 
@@ -59,10 +58,24 @@ This setup uses:
 
 | Keybind             | Action                         |
 | ------------------- | ------------------------------ |
-| SUPER + H / L       | Switch workspace (prev / next) |
-| SUPER + SHIFT + H/L | Move window between workspaces |
-| SUPER + ENTER       | Open terminal (kitty)          |
-| SUPER + D           | Open Rofi                      |
+| SUPER + H / L           | Switch workspace (prev / next) |
+| SUPER + SHIFT + H/L     | Move window between workspaces |
+| SUPER + 1-9,0           | Switch workspace               |
+| SUPER + SHIFT + [1-9,0] | Move window between workspaces |
+| SUPER + Q               | Open terminal (kitty)          |
+| SUPER + R               | Open Rofi                      |
+| SUPER + W               | Wallpaper Menu                 |
+| SUPER + V               | Clipboard                      |
+| SUPER + N               | Switch Panel                   |
+| SUPER + M               | Hyprlock                       |
+| SUPER + T               | Toggle Floating                |
+| SUPER + F               | Fullscreen                     |
+| SUPER + SHIFT + S       | Part Screen                    |
+| SUPER + SHIFT + P       | Screenshot Menu                |
+| SUPER +  P              | Hyprpicker                     |
+| SUPER + J               | Toggle Split                   |
+| SUPER + K               | Swap Split                     |
+| SUPER + X               | Browser (Firefox)              |
 
 ---
 
@@ -73,48 +86,9 @@ Clone the repository:
 ```bash
 git clone https://github.com/yourusername/your-hyprland-config.git
 cd your-hyprland-config
+bash ./install.sh
+
 ```
-
-Copy configs:
-
-```bash
-cp -r .config/* ~/.config/
-```
-
-Install dependencies (example for Arch-based systems):
-
-```bash
-sudo pacman -S hyprland kitty dolphin firefox rofi swww jq
-```
-
----
-
-## ⚠️ Notes
-
-* Make sure `swww-daemon` is running:
-
-  ```bash
-  swww-daemon &
-  ```
-
-* Rofi must support icons (`-show-icons`)
-
-* Large wallpaper directories may slow down preview loading
-
----
-
-## 📸 Screenshots
-
-*(Add your screenshots here)*
-
----
-
-## 📌 TODO
-
-* [ ] Add animations tuning
-* [ ] Improve Rofi UI (grid/gallery mode)
-* [ ] Add more scripts
-
 ---
 
 ## 🧠 Credits
@@ -122,7 +96,7 @@ sudo pacman -S hyprland kitty dolphin firefox rofi swww jq
 * Hyprland community
 * adi1090x (Rofi themes)
 * pinkSakoora (Hyprlock config)
-* michaelScopic (Wallpapers)
+* Mon4sm (Eww config)
 
 ---
 
