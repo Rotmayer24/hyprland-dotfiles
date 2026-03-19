@@ -3,7 +3,6 @@
 ROFI_THEME="$HOME/.config/rofi/style/style-panel.rasi"
 
 options="Waybar
-Polybar
 Hyprpanel
 Ewww
 Killall"
@@ -14,8 +13,6 @@ case "$choice" in
 Waybar)
   ~/.config/rofi/scripts/waybar-switch.sh &
   ;;
-
-Polybar) ;;
 
 Hyprpanel)
   killall -9 waybar 2>/dev/null
