@@ -60,10 +60,6 @@
     "reverse-direction": true,
     "show-passive-items": true
   },
-  "sway/language": {
-    "format": "{short} {variant}",
-    "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
-  },
   "pulseaudio": {
     "format": "{volume}% {icon}",
     "format-bluetooth": "{volume}% ",
@@ -96,22 +92,6 @@
     "interval": 5000,
     "max-length": 10
   },
-  "custom/waybar-mpris": {
-    "return-type": "json",
-    "id": "waybar-mpris",
-    "exec": "waybar-mpris --position --autofocus",
-    "on-click": "waybar-mpris --send toggle",
-    // This option will switch between players on right click.
-    "on-click-right": "waybar-mpris --send next",
-    // The options below will switch the selected player on scroll
-    // "on-scroll-up": "waybar-mpris --send player-next",
-    // "on-scroll-down": "waybar-mpris --send player-prev",
-    // The options below will go to next/previous track on scroll
-    "on-scroll-up": "waybar-mpris --send next",
-    "on-scroll-down": "waybar-mpris --send prev",
-    "max-length": 10,
-    "escape": true
-  },
   "custom/notification": {
     "tooltip": true,
     "format": "<span size='16pt'>{icon}</span>",
@@ -130,6 +110,18 @@
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "custom/waybar-mpris": {
+    "return-type": "json",
+    "id": "waybar-mpris",
+    "exec": "waybar-mpris --position --autofocus",
+    "on-click-middle": "waybar-mpris --send toggle",
+    "on-click-right": "waybar-mpris --send next",
+    "on-click": "waybar-mpris --send prev",
+    "on-scroll-up": "waybar-mpris --send next",
+    "on-scroll-down": "waybar-mpris --send prev",
+    "max-length": 10,
     "escape": true
   },
   "network": {
