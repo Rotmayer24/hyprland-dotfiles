@@ -5,6 +5,10 @@ This configuration is designed for Wayland environments and includes a curated s
 
 ---
 
+## Rice Gif
+
+![Rice](rice.gif)
+
 ## ✨ Features
 
 * Minimal and fast **Hyprland** configuration
