@@ -104,6 +104,6 @@ bash ./install.sh
 
 ## 📄 License
 
-MIT License (or your choice)
+MIT License
 
 ---
