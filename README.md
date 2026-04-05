@@ -87,7 +87,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/yourusername/your-hyprland-config.git
-cd your-hyprland-config
+cd hyprland-dotfiles
 bash ./install.sh
 
 ```
