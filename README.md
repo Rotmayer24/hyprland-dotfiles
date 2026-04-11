@@ -86,7 +86,7 @@ This configuration is designed for Wayland environments and includes a curated s
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/your-hyprland-config.git
+git clone https://github.com/Rotmayer24/hyprland-dotfiles.git
 cd hyprland-dotfiles
 bash ./install.sh
 
