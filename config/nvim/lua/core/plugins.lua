@@ -5,7 +5,7 @@ vim.pack.add({
 	"https://github.com/echasnovski/mini.surround",
 	"https://github.com/folke/persistence.nvim",
 	"https://github.com/lewis6991/gitsigns.nvim",
-
+	"https://github.com/saghen/blink.compat",
 	"https://github.com/catppuccin/nvim",
 	"https://github.com/rose-pine/neovim",
 	"https://github.com/ellisonleao/gruvbox.nvim",
@@ -225,18 +225,29 @@ require("blink.cmp").setup({
 		use_proximity = true,
 	},
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer" },
+		default = { "lsp", "path", "snippets", "buffer", "neocodeium" },
+		providers = {
+			neocodeium = {
+				name = "Codeium",
+				module = "blink.compat.source",
+				async = true,
+				score_offset = 5,
+				opts = {
+					name = "Codeium",
+				},
+			},
+		},
 	},
 })
 
 local builtin = require("telescope.builtin")
 require("telescope").setup({})
 
-vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find files" })
-vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Live grep" })
-vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current word" })
-vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search diagnostics" })
-vim.keymap.set("n", "gb", ":Telescope buffers<CR>", { desc = "Switch buffer" })
+vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "Find files" })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
+vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Search current word" })
+vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Search diagnostics" })
+vim.keymap.set("n", "fb", ":Telescope buffers<CR>", { desc = "Switch buffer" })
 
 local function SearchClasses()
 	builtin.lsp_dynamic_workspace_symbols({ symbols = { "Class" }, prompt_title = "Search Classes" })
@@ -248,14 +259,14 @@ local function SearchVariables()
 	builtin.lsp_dynamic_workspace_symbols({ symbols = { "Variable", "Constant" }, prompt_title = "Search Variables" })
 end
 
-vim.keymap.set("n", "<leader>sf", SearchFunctions, { desc = "Telescope: Search functions" })
-vim.keymap.set("n", "<leader>sc", SearchClasses, { desc = "Telescope: Search classes" })
-vim.keymap.set("n", "<leader>sv", SearchVariables, { desc = "Telescope: Search variables" })
-vim.keymap.set("n", "<leader>ss", builtin.lsp_dynamic_workspace_symbols, { desc = "Telescope: Search all symbols" })
-vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Telescope: Search help tags" })
-vim.keymap.set("n", "<leader>sq", builtin.quickfix, { desc = "Telescope: Show quickfix list" })
-vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Telescope: Search keymaps" })
-vim.keymap.set("n", "<C-e>", builtin.oldfiles, { desc = "Telescope: Recent files" })
+vim.keymap.set("n", "<leader>fs", SearchFunctions, { desc = "Telescope: Search functions" })
+vim.keymap.set("n", "<leader>fc", SearchClasses, { desc = "Telescope: Search classes" })
+vim.keymap.set("n", "<leader>fv", SearchVariables, { desc = "Telescope: Search variables" })
+vim.keymap.set("n", "<leader>fy", builtin.lsp_dynamic_workspace_symbols, { desc = "Telescope: Search all symbols" })
+vim.keymap.set("n", "<leader>ft", builtin.help_tags, { desc = "Telescope: Search help tags" })
+vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "Telescope: Show quickfix list" })
+vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Telescope: Search keymaps" })
+vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Telescope: Recent files" })
 
 require("store").setup()
 require("focal").setup()
@@ -297,6 +308,7 @@ require("gitsigns").setup()
 require("tiny-cmdline").setup()
 
 require("neocodeium").setup({
+	virtual_text = false,
 	manual = false,
 	debounce = false,
 })
@@ -408,11 +420,19 @@ require("toggleterm").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
-vim.keymap.set("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<CR>", { desc = "Terminal horizontal" })
-vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<CR>", { desc = "Terminal vertical" })
+vim.keymap.set("n", "<leader>th", function()
+	local height = math.floor(vim.o.lines * 0.25)
+	vim.cmd("ToggleTerm direction=horizontal size=" .. height)
+end, { desc = "Terminal horizontal 30%" })
+
+vim.keymap.set("n", "<leader>tv", function()
+	local width = math.floor(vim.o.columns * 0.5)
+	vim.cmd("ToggleTerm direction=vertical size=" .. width)
+end, { desc = "Terminal vertical 50%" })
 
 vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<CR>", { desc = "Open Lazygit" })
+
+vim.keymap.set("n", "<leader>r", "<cmd>restart<CR>", { desc = "Restart Neovim" })
 
 require("oil").setup({
 	default_view = "split",
@@ -422,7 +442,7 @@ require("oil").setup({
 		["-"] = "actions.parent",
 	},
 })
-vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Oil file explorer" })
 
 require("lspkind").init({
 	mode = "symbol_text",
@@ -596,3 +616,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 		vim.diagnostic.show()
 	end,
 })
+
+local function toggle_relative_number()
+	vim.wo.relativenumber = not vim.wo.relativenumber
+end
+
+vim.keymap.set("n", "<leader>nr", toggle_relative_number, { desc = "Toggle relative number" })

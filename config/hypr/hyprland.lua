@@ -1,0 +1,5 @@
+require("modules.exec_once")
+require("modules.keybinds")
+require("modules.monitors")
+require("modules.env")
+require("modules.general")

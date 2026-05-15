@@ -1,0 +1,6 @@
+hl.on("hyprland.start", function()
+	hl.exec_cmd("sh -c 'swww-daemon &'")
+	hl.exec_cmd("sh -c 'waybar &'")
+	hl.exec_cmd("sh -c 'wl-paste --type text --watch cliphist store &'")
+	hl.exec_cmd("sh -c 'wl-paste --type image --watch cliphist store &'")
+end)

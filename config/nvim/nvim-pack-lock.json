@@ -20,6 +20,10 @@
       "rev": "bae4bae0eedd1fa55f34b685862e94a222d5c6f8",
       "src": "https://github.com/Saghen/blink.cmp"
     },
+    "blink.compat": {
+      "rev": "1454f14a8d855a578ceeba77c62538fa1459a67c",
+      "src": "https://github.com/saghen/blink.compat"
+    },
     "codedocs.nvim": {
       "rev": "4d52da6d6993e8ac1ef9665e6daec5ce6e0a5635",
       "src": "https://github.com/jeangiraldoo/codedocs.nvim"
