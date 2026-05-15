@@ -2,7 +2,7 @@
 
 A clean and functional **Hyprland** setup focused on productivity, minimalism, and a smooth workflow.
 This configuration is designed for Wayland environments and includes a curated set of tools, themes, and scripts.
-
+(Minimal version of Hyprland 0.55.0)
 ---
 
 ## Rice Gif
@@ -66,11 +66,12 @@ This configuration is designed for Wayland environments and includes a curated s
 | SUPER + F               | Fullscreen                     |
 | SUPER + SHIFT + S       | Part Screen                    |
 | SUPER + SHIFT + P       | Screenshot Menu                |
-| SUPER +  P              | Hyprpicker                     |
+| SUPER + P               | Hyprpicker                     |
 | SUPER + J               | Toggle Split                   |
 | SUPER + K               | Swap Split                     |
 | SUPER + X               | Browser (Firefox)              |
-| SUPER + B               | Power Menu
+| SUPER + B               | Power Menu                     |
+| SUPER + I               | Menu (Power, Screenshot, menu) |
 
 ---
 ## Notes

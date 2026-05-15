@@ -3,129 +3,149 @@ set -euo pipefail
 
 # ----------------- utils -----------------
 log() {
-  echo "[*] $1"
+    echo "[*] $1"
 }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ "$EUID" -eq 0 ]; then
-  log "Don't run as root"
-  exit 1
+    log "Don't run as root"
+    exit 1
 fi
 
 if ! command -v pacman &>/dev/null; then
-  log "This script is for Arch-based systems"
-  exit 1
+    log "This script is for Arch-based systems"
+    exit 1
 fi
 
 # ----------------- install yay -----------------
 install_yay() {
-  if ! command -v yay &>/dev/null; then
-    log "Installing yay..."
-    sudo pacman -S --needed --noconfirm git base-devel
-    rm -rf /tmp/yay
-    git clone https://aur.archlinux.org/yay.git /tmp/yay
-    (
-      cd /tmp/yay
-      makepkg -si --noconfirm
-    )
-    rm -rf /tmp/yay
-  else
-    log "yay already installed"
-  fi
+    if ! command -v yay &>/dev/null; then
+        log "Installing yay..."
+        sudo pacman -S --needed --noconfirm git base-devel
+        rm -rf /tmp/yay
+        git clone https://aur.archlinux.org/yay.git /tmp/yay
+        (
+            cd /tmp/yay
+            makepkg -si --noconfirm
+        )
+        rm -rf /tmp/yay
+    else
+        log "yay already installed"
+    fi
 }
 
 # ----------------- official packages -----------------
 install_official() {
-  log "Installing official packages..."
-  official=(
-    hyprland
-    kitty
-    waybar
-    rofi
-    swaync
-    swww
-    playerctl
-    network-manager-applet
-    blueman
-    dbus
-    flameshot
-    grim
-    slurp
-    nvim
-    zsh
-  )
-  sudo pacman -S --needed --noconfirm "${official[@]}"
+    log "Installing official packages..."
+    official=(
+        hyprland
+        kitty
+        waybar
+        rofi
+        swaync
+        swww
+        playerctl
+        network-manager-applet
+        blueman
+        dbus
+        flameshot
+        grim
+        slurp
+        nvim
+        zsh
+    )
+    sudo pacman -S --needed --noconfirm "${official[@]}"
 }
 
 # ----------------- AUR packages -----------------
 install_aur() {
-  log "Installing AUR packages..."
-  aur=(
-    waybar-mpris
-    eww
-  )
-  if ! command -v yay &>/dev/null; then
-    log "Error: yay not installed"
-    exit 1
-  fi
-  yay -S --needed --noconfirm "${aur[@]}"
+    log "Installing AUR packages..."
+    aur=(
+        waybar-mpris
+        eww
+    )
+    if ! command -v yay &>/dev/null; then
+        log "Error: yay not installed"
+        exit 1
+    fi
+    yay -S --needed --noconfirm "${aur[@]}"
 }
 
 # ----------------- link dotfiles -----------------
 link_dotfiles() {
-  CONFIG_DIR="$HOME/.config"
-  WALLPAPER_DIR="$HOME/Pictures/"
-  WALLPAPERS="$WALLPAPER_DIR/Wallpapers"
-  ZSHENV="$HOME/.zshenv"
-  mkdir -p "$CONFIG_DIR"
-  mkdir -p "$WALLPAPER_DIR"
+    CONFIG_DIR="$HOME/.config"
+    WALLPAPER_DIR="$HOME/Pictures/"
+    WALLPAPERS="$WALLPAPER_DIR/Wallpapers"
+    ZSHENV="$HOME/.zshenv"
 
+    mkdir -p "$CONFIG_DIR"
+    mkdir -p "$WALLPAPER_DIR"
+    log "Wallpaper Directory: $WALLPAPER_DIR"
 
-  log " Wallpaper Directory: $WALLPAPER_DIR"
-  if [! -d "$WALLPAPERS" ]; then
-    cp -r "$SCRIPT_DIR/Wallpapers" "$WALLPAPER_DIR" 
-  else 
-    mv "$WALLPAPERS" "$WALLPAPERS".bak
-    cp -r "$SCRIPT_DIR/Wallpapers" "$WALLPAPER_DIR" 
-
-  if [! -f "$ZSHENV" ]; then
-    cp "$SCRIPT_DIR/zshenv" "$ZSHENV"
-  else
-    mv "$ZSHENV" "$ZSHENV".bak
-    cp "$SCRIPT_DIR/zshenv" "$ZSHENV"
-  fi
-
-  for d in waybar rofi kitty eww hypr nvim zsh; do
-    SRC="$SCRIPT_DIR/config/$d"
-    DST="$CONFIG_DIR/$d"
-
-    if [ ! -d "$SRC" ]; then
-      log "Warning: source $SRC not found, skipping"
-      continue
+    if [ ! -d "$WALLPAPERS" ]; then
+        cp -r "$SCRIPT_DIR/Wallpapers" "$WALLPAPER_DIR"
+    else
+        mv "$WALLPAPERS" "$WALLPAPERS".bak
+        cp -r "$SCRIPT_DIR/Wallpapers" "$WALLPAPER_DIR"
     fi
 
-    if [ -d "$DST" ]; then
-      log "Backing up existing $DST → $DST.bak"
-      mv "$DST" "$DST.bak"
+    if [ ! -f "$ZSHENV" ]; then
+        cp "$SCRIPT_DIR/zshenv" "$ZSHENV"
+    else
+        mv "$ZSHENV" "$ZSHENV".bak
+        cp "$SCRIPT_DIR/zshenv" "$ZSHENV"
     fi
 
-    log "Copying $SRC → $DST"
-    cp -r "$SRC" "$DST"
-  done
+    for d in waybar rofi kitty eww hypr nvim zsh; do
+        SRC="$SCRIPT_DIR/config/$d"
+        DST="$CONFIG_DIR/$d"
 
-  log "Dotfiles linked successfully."
+        if [ ! -d "$SRC" ]; then
+            log "Warning: source $SRC not found, skipping"
+            continue
+        fi
+
+        if [ -d "$DST" ]; then
+            log "Backing up existing $DST → $DST.bak"
+            mv "$DST" "$DST.bak"
+        fi
+
+        log "Copying $SRC → $DST"
+        cp -r "$SRC" "$DST"
+    done
+
+    log "Dotfiles linked successfully."
 }
 
 # ----------------- main -----------------
 main() {
-  install_yay
-  install_official
-  install_aur
-  link_dotfiles
+    install_yay
+    install_official
+    install_aur
+    link_dotfiles
 
-  log "Done! You can now start Hyprland or reboot your system."
+    log "Done!"
 
+    while :; do
+        printf "Reboot the system? (y/n): "
+        read answer
+
+        case "$answer" in
+        y | Y)
+            printf "Rebooting...\n"
+            sudo reboot
+            break
+            ;;
+        n | N)
+            printf "Cancelled.\n"
+            break
+            ;;
+        *)
+            printf "Invalid input.\n"
+            ;;
+        esac
+    done
 }
 
 main
