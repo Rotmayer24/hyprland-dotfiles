@@ -37,6 +37,8 @@ install_official() {
     log "Installing official packages..."
     official=(
         hyprland
+        hyprlock
+        hypridle
         waybar
         rofi
         swaync
@@ -46,6 +48,7 @@ install_official() {
         qt6-wayland
         polkit-gnome
         kitty
+        firefox
         zsh
         zsh-completions
         fzf
@@ -55,8 +58,15 @@ install_official() {
         blueman
         dbus
         playerctl
+        pipewire
+        pipewire-pulse
+        wireplumber
+        brightnessctl
         grim
         slurp
+        wl-clipboard
+        cliphist
+        hyprpicker
         eza
         bat
         zoxide
@@ -90,9 +100,10 @@ install_aur() {
 install_zinit() {
     if [ ! -f "$HOME/.config/zsh/zinit/zinit.zsh" ]; then
         log "Installing zinit..."
-        bash -c "$(curl --fail --show-error --silent --location \
-            https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)" \
-            -- --no-pager 2>/dev/null || true
+        if ! bash -c "$(curl --fail --show-error --silent --location \
+            https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"; then
+            log "Warning: zinit installation failed, check your internet connection"
+        fi
     else
         log "zinit already installed"
     fi
@@ -103,9 +114,13 @@ setup_zsh() {
     mkdir -p "$HOME/.local/share/zsh"
     touch "$HOME/.local/share/zsh/history"
     mkdir -p "$HOME/.cache/zsh"
-    if [ "$SHELL" != "$(command -v zsh)" ]; then
+
+    current_shell="$(getent passwd "$USER" | cut -d: -f7)"
+    zsh_path="$(command -v zsh)"
+
+    if [ "$current_shell" != "$zsh_path" ]; then
         log "Changing default shell to zsh..."
-        chsh -s "$(command -v zsh)"
+        chsh -s "$zsh_path"
     else
         log "zsh already default shell"
     fi
@@ -113,24 +128,26 @@ setup_zsh() {
 
 link_dotfiles() {
     CONFIG_DIR="$HOME/.config"
-    WALLPAPER_DIR="$HOME/Pictures/"
-    WALLPAPERS="$WALLPAPER_DIR/Wallpapers"
+    PICTURES_DIR="$HOME/Pictures"
+    WALLPAPERS="$PICTURES_DIR/Wallpapers"
     ZSHENV="$HOME/.zshenv"
+
     mkdir -p "$CONFIG_DIR"
-    mkdir -p "$WALLPAPER_DIR"
-    log "Wallpaper Directory: $WALLPAPER_DIR"
-    if [ ! -d "$WALLPAPERS" ]; then
-        cp -r "$SCRIPT_DIR/Wallpapers" "$WALLPAPER_DIR"
-    else
-        mv "$WALLPAPERS" "$WALLPAPERS".bak
-        cp -r "$SCRIPT_DIR/Wallpapers" "$WALLPAPER_DIR"
+    mkdir -p "$PICTURES_DIR"
+
+    log "Wallpaper directory: $WALLPAPERS"
+    if [ -d "$WALLPAPERS" ]; then
+        log "Backing up existing $WALLPAPERS → $WALLPAPERS.bak"
+        mv "$WALLPAPERS" "$WALLPAPERS.bak"
     fi
-    if [ ! -f "$ZSHENV" ]; then
-        cp "$SCRIPT_DIR/zshenv" "$ZSHENV"
-    else
-        mv "$ZSHENV" "$ZSHENV".bak
-        cp "$SCRIPT_DIR/zshenv" "$ZSHENV"
+    cp -r "$SCRIPT_DIR/Wallpapers" "$WALLPAPERS"
+
+    if [ -f "$ZSHENV" ]; then
+        log "Backing up existing $ZSHENV → $ZSHENV.bak"
+        mv "$ZSHENV" "$ZSHENV.bak"
     fi
+    cp "$SCRIPT_DIR/zshenv" "$ZSHENV"
+
     for d in waybar rofi kitty eww hypr nvim zsh; do
         SRC="$SCRIPT_DIR/config/$d"
         DST="$CONFIG_DIR/$d"
@@ -156,9 +173,10 @@ main() {
     setup_zsh
     link_dotfiles
     log "Done!"
+
     while :; do
         printf "Reboot the system? (y/n): "
-        read answer
+        read -r answer
         case "$answer" in
         y | Y)
             printf "Rebooting...\n"
