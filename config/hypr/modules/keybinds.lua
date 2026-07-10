@@ -24,7 +24,8 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("~/.config/rofi/scripts/clipboard/cli
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0 }))
 hl.bind(mainMod .. " + D", hl.dsp.window.fullscreen({ mode = 1 }))
 
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("~/.config/rofi/scripts/switch-panel.sh"))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("~/.config/rofi/scripts/switch-panel.sh"))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("~/.config/rofi/scripts/waybar-switch.sh"))
 
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprlock"))
 
