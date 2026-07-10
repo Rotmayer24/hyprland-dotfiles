@@ -18,3 +18,13 @@ vim.o.termguicolors = true
 vim.o.updatetime = 50
 vim.o.winborder = "rounded"
 vim.o.wrap = false
+vim.opt.mouse = "a"
+
+local undodir = vim.fn.expand("~/.config/nvim/undodir")
+if vim.fn.isdirectory(undodir) == 0 then
+    vim.fn.mkdir(undodir, "p")
+end
+
+vim.opt.undofile = true
+vim.opt.undodir = undodir
+vim.opt.encoding = "UTF-8"
