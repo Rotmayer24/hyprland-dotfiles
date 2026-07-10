@@ -18,18 +18,6 @@ tooltip {
   border-radius: 99px;
 }
 
-.modules-left {
-  background-color: @bg1;
-  padding: 2px 4px;
-  border-radius: 99px;
-}
-
-.modules-right {
-  background-color: @bg1;
-  padding: 2px 4px;
-  border-radius: 99px;
-}
-
 #clock {
   font-weight: 500;
 }
