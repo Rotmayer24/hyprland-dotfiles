@@ -83,12 +83,11 @@ install_official() {
 install_aur() {
     log "Installing AUR packages..."
     aur=(
-        waybar-mpris
+        waybar-mpris-git
         eww
         rofi-bluetooth
         nitch
         nvm
-        spicetify-cli
     )
     if ! command -v yay &>/dev/null; then
         log "Error: yay not installed"
