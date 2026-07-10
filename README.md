@@ -52,15 +52,15 @@ This configuration is designed for Wayland environments and includes a curated s
 
 | Keybind             | Action                         |
 | ------------------- | ------------------------------ |
-| SUPER + H / L           | Switch workspace (prev / next) |
-| SUPER + SHIFT + H/L     | Move window between workspaces |
+
 | SUPER + 1-9,0           | Switch workspace               |
 | SUPER + SHIFT + [1-9,0] | Move window between workspaces |
 | SUPER + Q               | Open terminal (kitty)          |
 | SUPER + R               | Open Rofi                      |
 | SUPER + W               | Wallpaper Menu                 |
 | SUPER + V               | Clipboard                      |
-| SUPER + N               | Switch Panel                   |
+| SUPER + N               | Switch Waybar                  |
+| SUPER + O               | Switch Panel                   |
 | SUPER + M               | Hyprlock                       |
 | SUPER + T               | Toggle Floating                |
 | SUPER + F               | Fullscreen                     |
@@ -72,6 +72,9 @@ This configuration is designed for Wayland environments and includes a curated s
 | SUPER + X               | Browser (Firefox)              |
 | SUPER + B               | Power Menu                     |
 | SUPER + I               | Menu (Power, Screenshot, menu) |
+| SUPER + S               | Toggle special mode            |
+| SUPER + Z               | Move App to special mode       |
+
 
 ---
 ## Notes
