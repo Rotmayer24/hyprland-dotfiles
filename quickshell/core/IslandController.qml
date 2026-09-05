@@ -1,0 +1,168 @@
+pragma Singleton
+
+import QtQuick
+
+import "../island"
+
+QtObject {
+    id: root
+
+    // =========================================================
+    // NAVIGATION
+    // Open a specific island view/mode.
+    // =========================================================
+
+    function openDefault() {
+        IslandState.mode =
+            IslandState.defaultMode
+    }
+
+    function openExpanded() {
+        IslandState.mode =
+            IslandState.expandedMode
+    }
+
+    function openPowerMenu() {
+        IslandState.mode =
+            IslandState.powerMenuMode
+    }
+
+    function openControlCenter() {
+        IslandState.mode =
+            IslandState.controlCenterMode
+    }
+
+    function openThemeSelector() {
+        IslandState.mode =
+            IslandState.themeSelectorMode
+    }
+
+    function openWallpaperSelector() {
+        IslandState.mode =
+            IslandState.wallpaperSelectorMode
+    }
+
+    function openMediaControls() {
+        ignoreNextIslandTap()
+
+        IslandState.islandPinned = true
+
+        IslandState.mode =
+            IslandState.mediaControlsMode
+    }
+
+    function openAppLauncher() {
+        IslandState.mode =
+            IslandState.appLauncherMode
+    }
+
+    function openClipboard() {
+        IslandState.mode =
+            IslandState.clipboardMode
+    }
+
+    function openBluetooth() {
+        IslandState.mode =
+            IslandState.bluetoothMode
+    }
+
+    function openWifi() {
+        IslandState.mode =
+            IslandState.wifiMode
+    }
+
+    function toggleBar() {
+        IslandState.barVisible =
+            !IslandState.barVisible
+    }
+
+    function showBar() {
+        IslandState.barVisible = true
+    }
+
+    function lockScreen() {
+        IslandState.barVisible = true
+        PowerService.lock()
+    }
+
+    function lock() {
+        IslandState.locked = true
+        IslandState.barVisible = true
+    }
+
+    function unlock() {
+        IslandState.locked = false
+    }
+
+    // =========================================================
+    // CONTEXTUAL NAVIGATION
+    // Open views from specific parts of the island while
+    // preserving the current interaction state.
+    // =========================================================
+
+    function openMediaFromLeftSection() {
+        ignoreNextIslandTap()
+
+        IslandState.returnToExpanded =
+            IslandState.islandPinned
+
+        IslandState.islandPinned = false
+
+        IslandState.mode =
+            IslandState.mediaControlsMode
+    }
+
+    function openControlCenterFromRightSection() {
+        IslandState.returnToExpanded =
+            IslandState.islandPinned
+
+        IslandState.islandPinned = false
+
+        IslandState.mode =
+            IslandState.controlCenterMode
+    }
+
+
+    // =========================================================
+    // INTERACTION
+    // Small state changes caused by direct island interaction.
+    // =========================================================
+
+    function ignoreNextIslandTap() {
+        IslandState.ignoreNextIslandTap = true
+
+        Qt.callLater(function() {
+            IslandState.ignoreNextIslandTap = false
+        })
+    }
+
+    function clearIgnoredTap() {
+        IslandState.ignoreNextIslandTap = false
+    }
+
+    function togglePin() {
+        IslandState.islandPinned =
+            !IslandState.islandPinned
+    }
+
+    function restoreExpanded() {
+        IslandState.islandPinned = true
+        IslandState.returnToExpanded = false
+
+        openExpanded()
+    }
+
+
+    // =========================================================
+    // RESET
+    // Return the island to its normal initial state.
+    // =========================================================
+
+    function reset() {
+        IslandState.ignoreNextIslandTap = false
+        IslandState.returnToExpanded = false
+        IslandState.islandPinned = false
+        IslandState.mode =
+            IslandState.defaultMode
+    }
+}
