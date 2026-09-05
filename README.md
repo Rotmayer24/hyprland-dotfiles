@@ -27,20 +27,20 @@ This configuration is designed for Wayland environments and includes a curated s
 
 ## Components
 
-| Component    | Program               |
-| ------------ | --------------------- |
-| Bar          | quickshell (island)   |
-| Terminal     | kitty                 |
-| Browser      | firefox               |
-| File Manager | dolphin               |
-| Lock Screen  | hyprlock              |
-| Launcher     | rofi                  |
-| Wallpaper    | awww                  |
-| Panel        | waybar / hyprpanel / eww |
-| Clipboard    | cliphist + wl-clipboard |
-| Music        | playerctl             |
-| Screenshots  | grim + slurp          |
-| Neovim       | neovim + lazy plugins |
+| Component    | Program                |
+| ------------ | ---------------------- |
+| Bar          | quickshell (island)    |
+| Terminal     | kitty                  |
+| Browser      | firefox                |
+| File Manager | dolphin                |
+| Lock Screen  | hyprlock               |
+| Launcher     | rofi                   |
+| Wallpaper    | awww                   |
+| Panel        |waybar / hyprpanel / eww|
+| Clipboard    |cliphist + wl-clipboard |
+| Music        | playerctl              |
+| Screenshots  | grim + slurp           |
+| Neovim       | neovim + lazy plugins  |
 
 ---
 
@@ -60,8 +60,8 @@ This configuration is designed for Wayland environments and includes a curated s
 | SUPER + SHIFT + L        | Lock Screen                      |
 | SUPER + T                | Toggle floating                  |
 | SUPER + F                | Fullscreen                       |
-| SUPER + SHIFT + S         | Partial screenshot (region)      |
-| SUPER + SHIFT + P         | Screenshot menu                  |
+| SUPER + SHIFT + S        | Partial screenshot (region)      |
+| SUPER + SHIFT + P        | Screenshot menu                  |
 | SUPER + P                | Hyprpicker                       |
 | SUPER + J                | Toggle split                     |
 | SUPER + K                | Swap split                       |
@@ -102,6 +102,8 @@ bash ./install.sh
 * **pinkSakoora** — Hyprlock config
 * **michaelScopic** — Wallpapers
 * **Mon4sm** — Eww config
+* **ElhamSadiqi** — Luci
+* **Shanu-Kumawat** — quickshell overview
 
 ---
 
