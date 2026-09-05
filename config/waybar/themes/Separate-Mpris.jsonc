@@ -94,7 +94,7 @@
     ]
   },
   "custom/weather": {
-    "exec": "${HOME}/.config/waybar/scripts/get_weather.sh YourCity+YourCountry",
+    "exec": "${HOME}/.config/waybar/scripts/get_weather.sh Muenster+Germany",
     "return-type": "json",
     "format": "{}",
     "tooltip": true,
@@ -134,7 +134,7 @@
     "escape": true
   },
   "network": {
-    "interface": "wlan0",
+    "interface": "wlp7s0",
     "format": "{ifname}",
     "format-wifi": "{icon}",
     "format-icons": [

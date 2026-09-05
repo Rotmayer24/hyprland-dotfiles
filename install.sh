@@ -17,32 +17,17 @@ if ! command -v pacman &>/dev/null; then
     exit 1
 fi
 
-install_yay() {
-    if ! command -v yay &>/dev/null; then
-        log "Installing yay..."
-        sudo pacman -S --needed --noconfirm git base-devel
-        rm -rf /tmp/yay
-        git clone https://aur.archlinux.org/yay.git /tmp/yay
-        (
-            cd /tmp/yay
-            makepkg -si --noconfirm
-        )
-        rm -rf /tmp/yay
-    else
-        log "yay already installed"
-    fi
-}
-
 install_official() {
     log "Installing official packages..."
     official=(
         hyprland
         hyprlock
         hypridle
+        quickshell
         waybar
         rofi
         swaync
-        swww
+        awww
         xdg-desktop-portal-hyprland
         qt5-wayland
         qt6-wayland
@@ -73,27 +58,12 @@ install_official() {
         uv
         python
         git
+        jq
         ttf-jetbrains-mono-nerd
         noto-fonts
         noto-fonts-emoji
     )
     sudo pacman -S --needed --noconfirm "${official[@]}"
-}
-
-install_aur() {
-    log "Installing AUR packages..."
-    aur=(
-        waybar-mpris-git
-        eww
-        rofi-bluetooth
-        nitch
-        nvm
-    )
-    if ! command -v yay &>/dev/null; then
-        log "Error: yay not installed"
-        exit 1
-    fi
-    yay -S --needed --noconfirm "${aur[@]}"
 }
 
 install_zinit() {
@@ -147,7 +117,7 @@ link_dotfiles() {
     fi
     cp "$SCRIPT_DIR/zshenv" "$ZSHENV"
 
-    for d in waybar rofi kitty eww hypr nvim zsh; do
+    for d in quickshell waybar rofi kitty eww hypr nvim zsh; do
         SRC="$SCRIPT_DIR/config/$d"
         DST="$CONFIG_DIR/$d"
         if [ ! -d "$SRC" ]; then
@@ -165,9 +135,7 @@ link_dotfiles() {
 }
 
 main() {
-    install_yay
     install_official
-    install_aur
     install_zinit
     setup_zsh
     link_dotfiles

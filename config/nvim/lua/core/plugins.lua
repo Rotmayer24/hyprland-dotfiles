@@ -12,8 +12,13 @@ vim.pack.add({
     "https://github.com/rebelot/kanagawa.nvim",
     "https://github.com/navarasu/onedark.nvim",
     "https://github.com/Mofiqul/dracula.nvim",
+    "https://github.com/shaunsingh/nord.nvim",
+    "https://github.com/neanias/everforest-nvim",
+    "https://github.com/maxmx03/solarized.nvim",
+    "https://github.com/projekt0n/github-nvim-theme",
 
     "https://github.com/folke/tokyonight.nvim",
+    "https://github.com/kdheepak/monochrome.nvim",
     "https://github.com/nvim-tree/nvim-tree.lua",
     "https://github.com/folke/which-key.nvim",
     "https://github.com/kdheepak/lazygit.nvim",
@@ -59,14 +64,35 @@ vim.pack.add({
     "https://github.com/molleweide/LuaSnip-snippets.nvim",
 })
 
-require("tokyonight").setup({
-    transparent = true,
-    styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-    },
-})
-vim.cmd.colorscheme("tokyonight")
+local theme_file = os.getenv("HOME") .. "/.config/quickshell/.current_theme"
+local f = io.open(theme_file, "r")
+local saved_theme = "tokyonight"
+if f then
+    local content = f:read("*a")
+    f:close()
+    if content and content:match("%S") then
+        saved_theme = content:match("^%s*(.-)%s*$")
+    end
+end
+
+local theme_map = {
+    catppuccin = "catppuccin",
+    gruvbox = "gruvbox",
+    tokyonight = "tokyonight",
+    dracula = "dracula",
+    rosepine = "rose-pine",
+    nord = "nord",
+    everforest = "everforest",
+    solarized = "solarized",
+    monochrome = "monochrome",
+    gruvboxlight = "gruvbox",
+    catppuccinlatte = "catppuccin",
+    githublight = "github_light",
+}
+
+local nvim_theme = theme_map[saved_theme] or "tokyonight"
+
+_G._startup_theme = nvim_theme
 require("neodev").setup()
 require("lsp-colors").setup()
 
@@ -467,6 +493,11 @@ local themes = {
     "rose-pine",
     "gruvbox",
     "kanagawa",
+    "nord",
+    "everforest",
+    "solarized",
+    "monochrome",
+    "github_light",
     "habamax",
     "elflord",
     "oxocarbon",
@@ -530,12 +561,57 @@ function SetTheme(theme_name)
             })
             vim.cmd.colorscheme("kanagawa")
         end)
+    elseif theme_name == "nord" then
+        pcall(function()
+            vim.g.nord_disable_background = true
+            require("nord").set()
+            vim.cmd.colorscheme("nord")
+        end)
+    elseif theme_name == "everforest" then
+        pcall(function()
+            require("everforest").setup({
+                background = "hard",
+                transparent_background_level = 2,
+            })
+            vim.cmd.colorscheme("everforest")
+        end)
+    elseif theme_name == "solarized" then
+        pcall(function()
+            require("solarized").setup({
+                theme = "neo",
+                transparent = true,
+            })
+            vim.cmd.colorscheme("solarized")
+        end)
+    elseif theme_name == "monochrome" then
+        pcall(function()
+            vim.cmd.colorscheme("monochrome")
+            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+        end)
+    elseif theme_name == "github_light" then
+        pcall(function()
+            require("github-theme").setup({
+                options = {
+                    transparent = true,
+                },
+            })
+            vim.cmd.colorscheme("github_light")
+        end)
     else
         vim.cmd.colorscheme(theme_name)
+        pcall(function()
+            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+        end)
     end
 
     vim.notify("Theme changed to: " .. theme_name, "info", { title = "Theme" })
 end
+
+SetTheme(_G._startup_theme)
 
 local function theme_picker()
     local theme_list = {}

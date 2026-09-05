@@ -3,3 +3,5 @@ require("modules.keybinds")
 require("modules.monitors")
 require("modules.env")
 require("modules.general")
+
+require("hyprland-gui")

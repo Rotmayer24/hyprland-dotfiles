@@ -14,51 +14,50 @@ This configuration is designed for Wayland environments and includes a curated s
 
 ---
 
-## ✨ Features
+## Features
 
 * Minimal and fast **Hyprland** configuration
-* Wallpaper picker with preview (Rofi-based)
-* Smooth wallpaper transitions using `swww`
-* Clean and modern lock screen
+* Island-style quickshell bar with dynamic views
+* Wallpaper picker with theme-based filtering
+* Smooth wallpaper transitions using `awww`
+* Clean and modern lock screen (hyprlock)
+* Theme switcher with live preview (kitty, nvim, hyprland, waybar)
 
 ---
 
-## 🧩 Components
+## Components
 
 | Component    | Program               |
 | ------------ | --------------------- |
+| Bar          | quickshell (island)   |
 | Terminal     | kitty                 |
 | Browser      | firefox               |
-| File Manager | Dolphin               |
+| File Manager | dolphin               |
 | Lock Screen  | hyprlock              |
 | Launcher     | rofi                  |
-| Wallpaper    | swww                  |
+| Wallpaper    | awww                  |
 | Panel        | waybar / hyprpanel / eww |
+| Clipboard    | cliphist + wl-clipboard |
+| Music        | playerctl             |
+| Screenshots  | grim + slurp          |
+| Neovim       | neovim + lazy plugins |
 
 ---
 
-## 🔗 External Resources
-
-* **Hyprlock config** — https://github.com/pinkSakoora/sakoora.hyprlock
-* **Rofi themes** — https://github.com/adi1090x/rofi
-* **Wallpapers** — https://github.com/michaelScopic/Wallpapers
-* **Eww** — https://github.com/Mon4sm/monasm-dots
-
----
-
-## ⌨ Keybindings (Highlights)
+## Keybindings
 
 | Keybind                 | Action                          |
 | ------------------------ | -------------------------------- |
-| SUPER + [1-9, 0]          | Switch workspace                 |
-| SUPER + SHIFT + [1-9, 0]  | Move window between workspaces   |
+| SUPER + [1-9, 0]         | Switch workspace                 |
+| SUPER + SHIFT + [1-9, 0] | Move window between workspaces   |
 | SUPER + Q                | Open terminal (kitty)            |
-| SUPER + R                | Open Rofi                        |
-| SUPER + W                | Wallpaper menu                   |
-| SUPER + V                | Clipboard                        |
-| SUPER + N                | Switch Waybar                    |
-| SUPER + O                | Switch panel                     |
-| SUPER + M                | Hyprlock                         |
+| SUPER + R                | Open App Launcher                |
+| SUPER + W                | Wallpaper Selector               |
+| SUPER + V                | Clipboard Manager                |
+| SUPER + B                | Power Menu                       |
+| SUPER + SHIFT + T        | Theme Selector                   |
+| SUPER + M                | Toggle Bar                       |
+| SUPER + SHIFT + L        | Lock Screen                      |
 | SUPER + T                | Toggle floating                  |
 | SUPER + F                | Fullscreen                       |
 | SUPER + SHIFT + S         | Partial screenshot (region)      |
@@ -67,21 +66,25 @@ This configuration is designed for Wayland environments and includes a curated s
 | SUPER + J                | Toggle split                     |
 | SUPER + K                | Swap split                       |
 | SUPER + X                | Browser (Firefox)                |
-| SUPER + B                | Power menu                       |
-| SUPER + I                | Menu (power, screenshot, etc.)   |
 | SUPER + S                | Toggle special workspace         |
 | SUPER + Z                | Move window to special workspace |
+| XF86AudioRaiseVolume     | Volume up                        |
+| XF86AudioLowerVolume     | Volume down                      |
+| XF86AudioMute            | Toggle mute                      |
+| XF86MonBrightnessUp      | Brightness up                    |
+| XF86MonBrightnessDown    | Brightness down                  |
 
 ---
 
-## 📝 Notes
+## Notes
 
-* You can add wallpapers to `~/Pictures/Wallpapers`.
+* You can add wallpapers to `~/Pictures/Wallpapers` (supports subfolders by theme).
+* Theme wallpapers are mapped in `~/.config/quickshell/assets/wallpapers.json`.
 * You can add your Waybar configurations to `~/.config/waybar/themes` using `.jsonc` and `.css` files.
 
 ---
 
-## 🚀 Installation
+## Installation
 
 Clone the repository:
 
@@ -93,7 +96,7 @@ bash ./install.sh
 
 ---
 
-## 🧠 Credits
+## Credits
 
 * **adi1090x** — Rofi themes
 * **pinkSakoora** — Hyprlock config
@@ -102,6 +105,6 @@ bash ./install.sh
 
 ---
 
-## 📄 License
+## License
 
 MIT License

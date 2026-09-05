@@ -28,3 +28,32 @@ end
 vim.opt.undofile = true
 vim.opt.undodir = undodir
 vim.opt.encoding = "UTF-8"
+
+local http_server_job = nil
+
+vim.keymap.set("n", "<leader>hs", function()
+    if http_server_job and vim.fn.jobwait({ http_server_job }, 0)[1] == -1 then
+        vim.fn.jobstop(http_server_job)
+        http_server_job = nil
+        vim.notify("HTTP server stopped", vim.log.levels.INFO)
+        return
+    end
+
+    http_server_job = vim.fn.jobstart(
+        { "python", "-m", "http.server", "8000" },
+        {
+            cwd = vim.fn.getcwd(),
+            detach = false,
+            on_exit = function()
+                http_server_job = nil
+            end,
+        }
+    )
+
+    if http_server_job > 0 then
+        vim.notify("HTTP server started: http://localhost:8000", vim.log.levels.INFO)
+    else
+        vim.notify("Failed to start HTTP server", vim.log.levels.ERROR)
+        http_server_job = nil
+    end
+end, { desc = "Toggle HTTP server" })

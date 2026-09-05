@@ -5,7 +5,7 @@ current="$dir"
 ROFI_THEME="$HOME/.config/rofi/style/style-wallpaper.rasi"
 
 set_wall() {
-  swww img "$1" --transition-type any --transition-duration 1
+  awww img "$1" --transition-type any --transition-duration 1
 }
 
 while true; do
