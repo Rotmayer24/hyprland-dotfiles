@@ -52,12 +52,29 @@ Item {
     MouseArea {
         anchors.fill: parent
 
-        acceptedButtons: Qt.LeftButton
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-        onClicked: {
+        onClicked: function(mouse) {
 
             if (IslandState.modal)
                 return
+
+            if (mouse.button === Qt.RightButton) {
+                let rightSectionWidth = 90
+                let rightMargin = 14
+                let rightSectionStart = root.width - rightSectionWidth - rightMargin
+                let midPoint = rightSectionStart + rightSectionWidth / 2
+
+                if (mouse.x >= rightSectionStart) {
+                    if (mouse.x > midPoint)
+                        IslandController.openWifi()
+                    else
+                        IslandController.openBluetooth()
+                } else {
+                    IslandController.openBluetooth()
+                }
+                return
+            }
 
             if (IslandState.mode === IslandState.controlCenterMode)
                 return

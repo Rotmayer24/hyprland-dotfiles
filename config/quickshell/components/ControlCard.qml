@@ -13,6 +13,7 @@ Rectangle {
     property bool active: false
 
     signal clicked()
+    signal rightClicked()
 
     implicitWidth: 150
     implicitHeight: 60
@@ -112,7 +113,14 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
     }
 
-    TapHandler {
-        onTapped: root.clicked()
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: function(mouse) {
+            if (mouse.button === Qt.RightButton)
+                root.rightClicked()
+            else
+                root.clicked()
+        }
     }
 }

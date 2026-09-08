@@ -33,6 +33,7 @@ Item {
         }
 
         RightSection {
+            id: expandedRightSection
 
             width: 90
 

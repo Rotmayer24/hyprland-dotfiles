@@ -17,6 +17,8 @@ QtObject {
     readonly property int mediaControlsMode: 6
     readonly property int appLauncherMode: 7
     readonly property int clipboardMode: 8
+    readonly property int bluetoothMode: 9
+    readonly property int wifiMode: 10
 
     // =========================================================
     // STATE
@@ -39,5 +41,7 @@ QtObject {
         mode === themeSelectorMode ||
         mode === wallpaperSelectorMode ||
         mode === appLauncherMode ||
-        mode === clipboardMode
+        mode === clipboardMode ||
+        mode === bluetoothMode ||
+        mode === wifiMode
 }

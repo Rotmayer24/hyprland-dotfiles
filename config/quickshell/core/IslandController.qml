@@ -61,6 +61,16 @@ QtObject {
             IslandState.clipboardMode
     }
 
+    function openBluetooth() {
+        IslandState.mode =
+            IslandState.bluetoothMode
+    }
+
+    function openWifi() {
+        IslandState.mode =
+            IslandState.wifiMode
+    }
+
     function toggleBar() {
         IslandState.barVisible =
             !IslandState.barVisible

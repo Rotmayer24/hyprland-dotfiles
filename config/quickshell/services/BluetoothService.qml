@@ -91,6 +91,8 @@ Singleton {
 
     function toggle() {
 
+        console.log("BluetoothService.toggle() called, enabled=", enabled)
+
         toggleProcess.running = false
 
         toggleProcess.command = [

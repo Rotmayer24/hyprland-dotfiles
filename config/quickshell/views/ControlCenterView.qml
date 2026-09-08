@@ -51,7 +51,12 @@ Item {
 
                 active: WifiService.connected
 
-                onClicked: WifiService.toggle()
+                onClicked: {
+                    console.log("CC: WiFi card clicked, calling WifiService.toggle()")
+                    WifiService.toggle()
+                }
+
+                onRightClicked: IslandController.openWifi()
             }
 
             ControlCard {
@@ -64,7 +69,12 @@ Item {
 
                 active: BluetoothService.enabled
 
-                onClicked: BluetoothService.toggle()
+                onClicked: {
+                    console.log("CC: BT card clicked, calling BluetoothService.toggle()")
+                    BluetoothService.toggle()
+                }
+
+                onRightClicked: IslandController.openBluetooth()
             }
 
             ControlCard {

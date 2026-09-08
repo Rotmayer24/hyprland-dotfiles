@@ -37,6 +37,7 @@ install_official() {
         zsh
         zsh-completions
         fzf
+        fd
         neovim
         thunar
         network-manager-applet

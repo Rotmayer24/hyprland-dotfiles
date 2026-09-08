@@ -34,6 +34,14 @@ IpcHandler {
         IslandController.openClipboard()
     }
 
+    function openBluetooth() {
+        IslandController.openBluetooth()
+    }
+
+    function openWifi() {
+        IslandController.openWifi()
+    }
+
     function toggleBar() {
         IslandController.toggleBar()
     }

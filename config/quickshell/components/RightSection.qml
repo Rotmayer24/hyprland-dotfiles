@@ -39,18 +39,13 @@ Item {
                 cursorShape: Qt.PointingHandCursor
             }
 
-            TapHandler {
-
+            MouseArea {
+                anchors.fill: parent
                 acceptedButtons: Qt.LeftButton
-                gesturePolicy: TapHandler.ReleaseWithinBounds
+                cursorShape: Qt.PointingHandCursor
 
-                onTapped: function(event) {
-
-                    event.accepted = true
-
-                    if (
-                        IslandState.mode === IslandState.controlCenterMode
-                    )
+                onClicked: function(mouse) {
+                    if (IslandState.mode === IslandState.controlCenterMode)
                         return
 
                     IslandController.openControlCenterFromRightSection()
@@ -65,6 +60,16 @@ Item {
                 spacing: 14
 
                 Text {
+                    id: btIcon
+                    text: "󰂯"
+                    color: Theme.icon
+
+                    font.family: "JetBrainsMono Nerd Font"
+                    font.pixelSize: 16
+                }
+
+                Text {
+                    id: wifiIcon
                     text: WifiService.icon
                     color: Theme.icon
 

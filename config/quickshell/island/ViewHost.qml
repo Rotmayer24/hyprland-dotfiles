@@ -51,6 +51,12 @@ Item {
             case IslandState.clipboardMode:
                 return clipboardView
 
+            case IslandState.bluetoothMode:
+                return bluetoothView
+
+            case IslandState.wifiMode:
+                return wifiView
+
             default:
                 return defaultView
             }
@@ -105,5 +111,15 @@ Item {
     Component {
         id: clipboardView
         ClipboardView { }
+    }
+
+    Component {
+        id: bluetoothView
+        BluetoothView { }
+    }
+
+    Component {
+        id: wifiView
+        WifiView { }
     }
 }

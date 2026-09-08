@@ -258,6 +258,8 @@ Singleton {
 
     function toggle() {
 
+        console.log("WifiService.toggle() called, connected=", connected)
+
         wifiToggle.running = false
 
 
